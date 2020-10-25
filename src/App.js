@@ -7,10 +7,11 @@ function App() {
   const [repositories, setRepositories] = useState([]);
 
   useEffect(() => {
-    api.get("repositories").then((Response) => {
-      setRepositories(Response.data);
+    api.get("repositories").then((response) => {
+      setRepositories(response.data);
     });
   }, []);
+
   async function handleAddRepository() {
     // TODO
     const response = await api.post("repositories", {
@@ -19,17 +20,18 @@ function App() {
       techs: ["node", "Reactjs"],
     });
 
-    setRepositories([...repositories, response.date])
+    setRepositories([...repositories, response.data])
+
   }
 
   async function handleRemoveRepository(id) {
+    // TODO
 
     await api.delete(`repositories/${id}`);
 
     setRepositories(repositories.filter(
       repository => repository.id !== id
     ))
-    // TODO
   }
 
   return (
